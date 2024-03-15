@@ -3,9 +3,11 @@
 h=`hostname`
 echo "hostname : $h"
 
-wget 
+wget https://raw.githubusercontent.com/Waanz/Miner/main/host.cfg -O host.cfg
 
-echo "nbr_cpu : $h_cpu"
+nbr_cpu=$(grep $h host.cfg )
+
+echo "nbr_cpu : $nbr_cpu"
 echo "token :$_token"
 
 wget https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
