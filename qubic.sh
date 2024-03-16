@@ -59,7 +59,7 @@ fi
 
 if [ "$gpu_true" = "y" ] ; then 
   echo Creation répertoire gpu 
-  mkdir -p cd /home/user/gpu
+  mkdir -p /home/user/gpu
   cd /home/user 
   cp qli-Client appsettings.json gpu/
   echo "Ajout au fichier de config GPU"
