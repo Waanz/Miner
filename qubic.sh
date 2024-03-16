@@ -2,17 +2,17 @@
 
 echo "C'est parti!"
 
-if [[ `id -u` != 1000 ]] ; then echo "pas bon user (su user)" ; else echo "Good, bon user (uid=1000(user))" ; fi 
+if [ `id -u` != 1000 ] ; then echo "pas bon user (su user)" ; else echo "Good, bon user (uid=1000(user))" ; fi 
 
 h=`hostname`
 
-wget --no-clobber https://raw.githubusercontent.com/Waanz/Miner/main/host.cfg -O host.cfg
+wget -q https://raw.githubusercontent.com/Waanz/Miner/main/host.cfg
 
 nbr_cpu=$(grep ^$h\; host.cfg  | awk -F\; '{print $2}')
 token=$(grep ^$h\; host.cfg  | awk -F\; '{print $3}' )
 
 
-wget https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
+wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
 gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
 tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
 
