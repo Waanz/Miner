@@ -2,13 +2,13 @@
 
 echo "C'est parti!"
 
-if [ `id -u` != 1000 ] ; then echo "pas bon user (su user)" ; else echo "Good, bon user (uid=1000(user))" ; fi 
+if [ `id -u` != 1000 ] ; then echo "pas bon user (su user)" ; exit 1 ; else echo "Good, bon user (uid=1000(user))" ; fi 
 
 
 echo "On stop toute"
 
-sudo pkill qli-Client
-pkill screen
+sudo pkill -e qli-Client
+pkill -e screen
 
 rm qli-runner qli-runner.lock
 
@@ -36,7 +36,7 @@ sed -i "s/\"amountOfThreads\": 1/\"amountOfThreads\": $nbr_cpu/" appsettings.jso
 sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h\"/" appsettings.json
 
 echo "Ajout au crontab"
-echo "@reboot curl https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | sh " | crontab
+echo "@reboot curl -s https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | sh " | crontab
 
 #echo "@reboot cd /home/user ; /usr/bin/screen -dmS qubic sudo /home/user/qli-Client" | crontab
 
