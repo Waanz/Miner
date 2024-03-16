@@ -12,7 +12,7 @@ echo "nbr_cpu : $nbr_cpu"
 echo "token :$token"
 
 wget https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
-gzip -d qli-Client-1.8.8-Linux-x64.tar.gz
+gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
 tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client
 
 
