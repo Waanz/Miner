@@ -4,6 +4,12 @@ echo "C'est parti!"
 
 if [ `id -u` != 1000 ] ; then echo "pas bon user (su user)" ; else echo "Good, bon user (uid=1000(user))" ; fi 
 
+
+echo "On stop toute"
+
+sudo pkill qli-Client
+pkill screen
+
 h=`hostname`
 
 wget -q https://raw.githubusercontent.com/Waanz/Miner/main/host.cfg
