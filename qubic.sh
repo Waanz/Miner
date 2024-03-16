@@ -14,10 +14,10 @@ rm qli-runner qli-runner.lock
 
 h=`hostname`
 
-wget -q https://raw.githubusercontent.com/Waanz/Miner/main/host.cfg
+wget -q https://raw.githubusercontent.com/Waanz/Miner/main/hosts.cfg
 
-nbr_cpu=$(grep ^$h\; host.cfg  | awk -F\; '{print $2}')
-token=$(grep ^$h\; host.cfg  | awk -F\; '{print $3}' )
+nbr_cpu=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $2}')
+token=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $3}' )
 
 
 wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
