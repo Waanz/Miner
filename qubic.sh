@@ -19,9 +19,12 @@ rm -f qli-runner qli-runner.lock
 
 #Download Client
 echo "Download le client"
-wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz -O qli-Client-1.8.8-Linux-x64.tar.gz
-gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
-tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
+#wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz -O qli-Client-1.8.8-Linux-x64.tar.gz
+#gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
+#tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
+wget -q https://dl.qubic.li/downloads/qli-Client-1.8.9-Linux-x64.tar.gz -O qli-Client-1.8.9-Linux-x64.tar.gz
+gzip -f -d qli-Client-1.8.9-Linux-x64.tar.gz
+tar xf qli-Client-1.8.9-Linux-x64.tar qli-Client appsettings.json
 
 #fichier de config
 echo "Download fichier de config"
