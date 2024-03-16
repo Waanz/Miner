@@ -73,7 +73,7 @@ fi
 
 
 echo "Ajout au crontab"
-echo "@reboot curl -s https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | sh " | crontab
+echo "@reboot /hive/sbin/curl -s https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | /usr/bin/sh " | crontab
 
 echo Voici le crontab
 crontab -l
