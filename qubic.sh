@@ -73,7 +73,7 @@ fi
 
 
 echo "Ajout au crontab"
-echo "@reboot cd /home/user ; /usr/bin/wget -q https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh -O qubic.sh ; /usr/bin/sh /home/user/qubic.sh" | crontab
+echo "@reboot sleep 120 ; cd /home/user ; /usr/bin/wget -q https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh -O qubic.sh ; /usr/bin/sh /home/user/qubic.sh" | crontab
 
 echo Voici le crontab
 crontab -l
