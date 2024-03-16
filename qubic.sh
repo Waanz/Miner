@@ -33,11 +33,14 @@ echo "@reboot cd /home/user ; /usr/bin/screen -dmS qubic sudo /home/user/qli-Cli
 echo Voici le crontab
 crontab -l
 
-echo Kill les screen 
+echo "Kill les screen"
 pkill screen
+
+echo "Départ du miner"
 
 cd /home/user
 /usr/bin/screen -dmS qubic sudo /home/user/qli-Client
 
-echo C'est parti
+echo "C'est parti ( screen -ls )"
+
 screen -ls
