@@ -36,7 +36,9 @@ sed -i "s/\"amountOfThreads\": 1/\"amountOfThreads\": $nbr_cpu/" appsettings.jso
 sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h\"/" appsettings.json
 
 echo "Ajout au crontab"
-echo "@reboot cd /home/user ; /usr/bin/screen -dmS qubic sudo /home/user/qli-Client" | crontab
+echo "@reboot cd /home/user ; curl https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | sh 
+
+#echo "@reboot cd /home/user ; /usr/bin/screen -dmS qubic sudo /home/user/qli-Client" | crontab
 
 echo Voici le crontab
 crontab -l
