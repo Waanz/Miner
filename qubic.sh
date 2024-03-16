@@ -4,53 +4,78 @@ echo "C'est parti!"
 
 if [ `id -u` != 1000 ] ; then echo "pas bon user (su user)" ; exit 1 ; else echo "Good, bon user (uid=1000(user))" ; fi 
 
-
 echo "On stop toute"
 
+echo "Kill des qli-Client"
 sudo pkill -e qli-Client
+
+echo "Kill les screen"
 pkill -e screen
 
 rm -f qli-runner qli-runner.lock
+
+
+echo "Download le client"
+wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
+gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
+tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
+
 
 h=`hostname`
 
 wget -q https://raw.githubusercontent.com/Waanz/Miner/main/hosts.cfg
 
-nbr_cpu=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $2}')
-token=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $3}' )
+cpu_true=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $2}')
+nbr_cpu=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $3}')
+gpu_true=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $4}')
+token=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $5}' )
 
-
-wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
-gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
-tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
 
 echo "Voici la config"
 echo "hostname : $h"
+echo "cpu actif: $cpu_true"
 echo "nbr_cpu : $nbr_cpu"
+echo "gpu actif: $gpu_true"
 echo "token :$token"
 echo 
 
-echo "Ajout au fichier de config"
-sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" appsettings.json
-sed -i "s/\"amountOfThreads\": 1/\"amountOfThreads\": $nbr_cpu/" appsettings.json
-sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h\"/" appsettings.json
 
-echo "Ajout au crontab"
-echo "@reboot curl -s https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | sh " | crontab
-
-#echo "@reboot cd /home/user ; /usr/bin/screen -dmS qubic sudo /home/user/qli-Client" | crontab
-
-echo Voici le crontab
-crontab -l
-
-echo "Kill les screen"
-pkill screen
-
-echo "Départ du miner"
-
-cd /home/user
-/usr/bin/screen -dmS qubic sudo /home/user/qli-Client
+if [ $cpu_true == "y" ] ; then 
+  echo Creation répertoire cpu
+  mkdir -p cpu 
+  cp qli-Client appsettings.json cpu/
+  echo "Ajout au fichier de config CPU"
+  sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" cpu/appsettings.json
+  sed -i "s/\"amountOfThreads\": 1/\"amountOfThreads\": $nbr_cpu/" cpu/appsettings.json
+  sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.cpu\"/" cpu/appsettings.json
+  cd /home/user/cpu
+  /usr/bin/screen -dmS qubic.cpu sudo ./qli-Client
 
 echo "C'est parti ( screen -ls )"
 
 screen -ls
+fi
+
+if [ $gpu_true_true == "y" ] ; then 
+  echo Creation répertoire gpu 
+  mkdir -p gpu
+  cp qli-Client appsettings.json gpu/
+  echo "Ajout au fichier de config GPU"
+  sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" gpu/appsettings.json
+  sed -i "s/\"amountOfThreads\": 1/\"allowHwInfoCollect\": true/" gpu/appsettings.json
+  sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.gpu\"/" gpu/appsettings.json
+  cd /home/user/gpu
+  /usr/bin/screen -dmS qubic.gpu sudo ./qli-Client
+fi
+
+
+echo "Ajout au crontab"
+echo "@reboot curl -s https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh | sh " | crontab
+
+echo Voici le crontab
+crontab -l
+
+pkill screen
+
+echo "Départ du miner"
+
