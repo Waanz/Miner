@@ -4,6 +4,8 @@ echo "C'est parti!"
 
 if [ `id -u` != 1000 ] ; then echo "pas bon user (su user)" ; exit 1 ; else echo "Good, bon user (uid=1000(user))" ; fi 
 
+cd /home/user
+
 echo "On stop toute"
 
 echo "Kill des qli-Client"
@@ -17,13 +19,13 @@ rm -f qli-runner qli-runner.lock
 
 #Download Client
 echo "Download le client"
-wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
+wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz -O qli-Client-1.8.8-Linux-x64.tar.gz
 gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
 tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
 
 #fichier de config
 echo "Download fichier de config"
-wget -q https://raw.githubusercontent.com/Waanz/Miner/main/hosts.cfg
+wget -q https://raw.githubusercontent.com/Waanz/Miner/main/hosts.cfg -O hosts.cfg
 
 h=`hostname`
 cpu_true=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $2}')
