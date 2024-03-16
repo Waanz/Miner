@@ -40,7 +40,7 @@ echo "gpu actif: $gpu_true"
 echo "token :$token"
 
 
-if [ "$cpu_true" -eq "y" ] ; then 
+if [ "$cpu_true" = "y" ] ; then 
   echo Creation répertoire cpu
   mkdir -p cpu 
   cp qli-Client appsettings.json cpu/
@@ -54,7 +54,7 @@ if [ "$cpu_true" -eq "y" ] ; then
 
 fi
 
-if [ $gpu_true -eq "y" ] ; then 
+if [ $gpu_true = "y" ] ; then 
   echo Creation répertoire gpu 
   mkdir -p gpu
   cp qli-Client appsettings.json gpu/
