@@ -1,4 +1,8 @@
-#
+# Proudly mabe by 3amigos
+
+echo "C'est parti!"
+
+if [[ `id -u` != 1000 ]] ; then echo "pas bon user (su user)" ; else echo "Good, bon user (uid=1000(user))" ; fi 
 
 h=`hostname`
 
@@ -28,6 +32,9 @@ echo "@reboot cd /home/user ; /usr/bin/screen -dmS qubic sudo /home/user/qli-Cli
 
 echo Voici le crontab
 crontab -l
+
+echo Kill les screen 
+pkill screen
 
 cd /home/user
 /usr/bin/screen -dmS qubic sudo /home/user/qli-Client
