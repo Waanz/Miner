@@ -42,7 +42,8 @@ echo "token :$token"
 
 if [ "$cpu_true" = "y" ] ; then 
   echo Creation répertoire cpu
-  mkdir -p cpu 
+  mkdir -p cd /home/user/cpu 
+  cd /home/user 
   cp qli-Client appsettings.json cpu/
   echo "Ajout au fichier de config CPU"
   sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" cpu/appsettings.json
@@ -56,7 +57,8 @@ fi
 
 if [ $gpu_true = "y" ] ; then 
   echo Creation répertoire gpu 
-  mkdir -p gpu
+  mkdir -p cd /home/user/gpu
+  cd /home/user 
   cp qli-Client appsettings.json gpu/
   echo "Ajout au fichier de config GPU"
   sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" gpu/appsettings.json
