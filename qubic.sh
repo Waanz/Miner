@@ -57,7 +57,7 @@ if [ "$cpu_true" = "y" ] ; then
 
 fi
 
-if [ $gpu_true = "y" ] ; then 
+if [ "$gpu_true" = "y" ] ; then 
   echo Creation répertoire gpu 
   mkdir -p cd /home/user/gpu
   cd /home/user 
