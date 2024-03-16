@@ -10,6 +10,8 @@ echo "On stop toute"
 sudo pkill qli-Client
 pkill screen
 
+rm qli-runner qli-runner.lock
+
 h=`hostname`
 
 wget -q https://raw.githubusercontent.com/Waanz/Miner/main/host.cfg
