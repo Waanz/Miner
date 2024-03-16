@@ -10,7 +10,7 @@ echo "On stop toute"
 sudo pkill -e qli-Client
 pkill -e screen
 
-rm qli-runner qli-runner.lock
+rm -f qli-runner qli-runner.lock
 
 h=`hostname`
 
