@@ -76,15 +76,15 @@ if [ "$gpu_true" = "y" ] ; then
   sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.gpu\"/" gpu/appsettings.json
 
   echo "Mise en place du tuning"
-  nvtool --csv -d -n | awk -F';' '/3060/ {print "nvtool -i " $1 " --setcoreoffset 250 --setclocks 1500 --setmem 5001"}' | sh
-  nvtool --csv -d -n | awk -F';' '/3070/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
-  nvtool --csv -d -n | awk -F';' '/3080/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
-  nvtool --csv -d -n | awk -F';' '/3090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
-  nvtool --csv -d -n | awk -F';' '/3090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
-  nvtool --csv -d -n | awk -F';' '/4060/ {print "nvtool -i " $1 " --setcoreoffset 250 --setclocks 2400 --setmem 5001"}' | sh
-  nvtool --csv -d -n | awk -F';' '/4070/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
-  nvtool --csv -d -n | awk -F';' '/4080/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
-  nvtool --csv -d -n | awk -F';' '/5090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/3060/ {print "nvtool -i " $1 " --setcoreoffset 250 --setclocks 1500 --setmem 5001"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/3070/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/3080/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/3090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/3090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 1600 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/4060/ {print "nvtool -i " $1 " --setcoreoffset 250 --setclocks 2400 --setmem 5001"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/4070/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/4080/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
+  sudo nvtool --csv -d -n | awk -F';' '/5090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
   
   
   cd /home/user/gpu
