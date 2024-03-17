@@ -47,7 +47,7 @@ echo "token :$token"
 
 if [ "$cpu_true" = "y" ] ; then 
   echo Creation répertoire cpu
-  mkdir -p cd /home/user/cpu 
+  mkdir -p /home/user/cpu 
   cd /home/user 
   cp qli-Client appsettings.json cpu/
   echo "Ajout au fichier de config CPU"
