@@ -56,6 +56,7 @@ echo "token :$token"
 
 if [ "$cpu_true" = "y" ] ; then 
   echo Creation répertoire cpu
+  sudo rm -rf /home/user/cpu 
   mkdir -p /home/user/cpu 
   cd /home/user 
   cp qli-Client appsettings.json cpu/
@@ -70,13 +71,14 @@ if [ "$cpu_true" = "y" ] ; then
   sudo sysctl -w vm.nr_hugepages=$nbr_hugepages
   cd /home/user/cpu
   echo "Départ du miner CPU"
-  /usr/bin/screen -L -Logfile /run/user/1000/qubic.cpu.log -dmS qubic.cpu sudo ./qli-Client
+  /usr/bin/screen -L -Logfile /run/user/1000/qubic.cpu.log -dmS qubic.cpu ./qli-Client
   
 
 fi
 
 if [ "$gpu_true" = "y" ] ; then 
   echo Creation répertoire gpu 
+  sudo rm -rf /home/user/gpu
   mkdir -p /home/user/gpu
   cd /home/user 
   cp qli-Client appsettings.json gpu/
@@ -99,7 +101,7 @@ if [ "$gpu_true" = "y" ] ; then
   
   cd /home/user/gpu
   echo "Départ du miner GPU"
-  /usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS qubic.gpu sudo ./qli-Client
+  /usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS qubic.gpu ./qli-Client
 
 fi
 
