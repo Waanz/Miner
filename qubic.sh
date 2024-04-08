@@ -26,9 +26,12 @@ echo "Download le client"
 #gzip -f -d qli-Client-1.8.9-Linux-x64.tar.gz
 #tar xf qli-Client-1.8.9-Linux-x64.tar qli-Client appsettings.json
 #https://dl.qubic.li/downloads/qli-Client-1.8.10-Linux-x64.tar.gz
-wget -q https://dl.qubic.li/downloads/qli-Client-1.8.10-Linux-x64.tar.gz -O qli-Client-1.8.10-Linux-x64.tar.gz
-gzip -f -d qli-Client-1.8.10-Linux-x64.tar.gz
-tar xf qli-Client-1.8.10-Linux-x64.tar qli-Client appsettings.json
+#wget -q https://dl.qubic.li/downloads/qli-Client-1.8.10-Linux-x64.tar.gz -O qli-Client-1.8.10-Linux-x64.tar.gz
+#gzip -f -d qli-Client-1.8.10-Linux-x64.tar.gz
+#tar xf qli-Client-1.8.10-Linux-x64.tar qli-Client appsettings.json
+wget -q https://dl.qubic.li/downloads/qli-Client-1.9.0-Linux-x64.tar.gz -O qli-Client-1.9.0-Linux-x64.tar.gz
+gzip -f -d qli-Client-1.9.0-Linux-x64.tar.gz
+tar xf qli-Client-1.9.0-Linux-x64.tar qli-Client appsettings.json
 
 
 
