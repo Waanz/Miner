@@ -29,18 +29,18 @@ echo "Download le client"
 #wget -q https://dl.qubic.li/downloads/qli-Client-1.8.10-Linux-x64.tar.gz -O qli-Client-1.8.10-Linux-x64.tar.gz
 #gzip -f -d qli-Client-1.8.10-Linux-x64.tar.gz
 #tar xf qli-Client-1.8.10-Linux-x64.tar qli-Client appsettings.json
-wget -q https://dl.qubic.li/downloads/qli-Client-1.9.0-Linux-x64.tar.gz -O qli-Client-1.9.0-Linux-x64.tar.gz
+wget -q https://dl.qubic.li/downloads/qli-Client-1.9.0-Linux-x64.tar.gz -O /home/user/qli-Client-1.9.0-Linux-x64.tar.gz
 gzip -f -d qli-Client-1.9.0-Linux-x64.tar.gz
 tar xf qli-Client-1.9.0-Linux-x64.tar qli-Client appsettings.json
 
 #Ajout
-wget -q https://github.com/Qubic-Solutions/rqiner-builds/releases/download/v0.3.22/rqiner-x86-cuda -O rqiner-x86-cuda
+wget -q https://github.com/Qubic-Solutions/rqiner-builds/releases/download/v0.3.22/rqiner-x86-cuda -O /home/user/rqiner-x86-cuda
 chmod +x rqiner-x86-cuda
 
 
 #fichier de config
 echo "Download fichier de config"
-wget -q https://raw.githubusercontent.com/Waanz/Miner/main/hosts.cfg -O hosts.cfg
+wget -q https://raw.githubusercontent.com/Waanz/Miner/main/hosts.cfg -O /home/user/hosts.cfg
 
 h=`hostname`
 cpu_true=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $2}')
@@ -113,7 +113,7 @@ fi
 
 
 echo "Ajout au crontab"
-echo "@reboot sleep 120 ; cd /home/user ; /usr/bin/wget -q https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh -O qubic.sh ; /usr/bin/sh /home/user/qubic.sh" | crontab
+echo "@reboot sleep 120 ; cd /home/user ; /usr/bin/wget -q https://raw.githubusercontent.com/Waanz/Miner/main/qubic.sh -O /home/user/qubic.sh ; /usr/bin/sh /home/user/qubic.sh" | crontab
 
 echo Voici le crontab
 crontab -l
