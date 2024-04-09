@@ -33,6 +33,9 @@ wget -q https://dl.qubic.li/downloads/qli-Client-1.9.0-Linux-x64.tar.gz -O qli-C
 gzip -f -d qli-Client-1.9.0-Linux-x64.tar.gz
 tar xf qli-Client-1.9.0-Linux-x64.tar qli-Client appsettings.json
 
+#Ajout
+wget -q https://github.com/Qubic-Solutions/rqiner-builds/releases/download/v0.3.22/rqiner-x86-cuda -O rqiner-x86-cuda
+chmod +x rqiner-x86-cuda
 
 
 #fichier de config
@@ -44,6 +47,7 @@ cpu_true=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $2}')
 nbr_cpu=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $3}')
 gpu_true=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $4}')
 token=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $5}' )
+payout=$(grep ^$h\; hosts.cfg  | awk -F\; '{print $6}' )
 
 
 echo "Voici la config"
@@ -52,6 +56,7 @@ echo "cpu actif: $cpu_true"
 echo "nbr_cpu : $nbr_cpu"
 echo "gpu actif: $gpu_true"
 echo "token :$token"
+echo "payout :$payout"
 
 
 if [ "$cpu_true" = "y" ] ; then 
@@ -81,11 +86,11 @@ if [ "$gpu_true" = "y" ] ; then
   sudo rm -rf /home/user/gpu
   mkdir -p /home/user/gpu
   cd /home/user 
-  cp qli-Client appsettings.json gpu/
-  echo "Ajout au fichier de config GPU"
-  sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" gpu/appsettings.json
-  sed -i "s/\"amountOfThreads\": 1/\"allowHwInfoCollect\": true/" gpu/appsettings.json
-  sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.gpu\"/" gpu/appsettings.json
+  #cp qli-Client appsettings.json gpu/
+  #echo "Ajout au fichier de config GPU"
+  #sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" gpu/appsettings.json
+  #sed -i "s/\"amountOfThreads\": 1/\"allowHwInfoCollect\": true/" gpu/appsettings.json
+  #sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.gpu\"/" gpu/appsettings.json
 
   echo "Mise en place du tuning"
   sudo nvtool --csv -d -n | awk -F';' '/3060/ {print "nvtool -i " $1 " --setcoreoffset 250 --setclocks 1500 --setmem 5001"}' | sh
@@ -99,9 +104,10 @@ if [ "$gpu_true" = "y" ] ; then
   sudo nvtool --csv -d -n | awk -F';' '/4090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
   
   
-  cd /home/user/gpu
+  #cd /home/user/gpu
   echo "Départ du miner GPU"
-  /usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS qubic.gpu ./qli-Client
+  #/usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS qubic.gpu ./qli-Client
+  /usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS rqiner.gpu ./rqiner-x86-cuda -i $payout -l $h
 
 fi
 
