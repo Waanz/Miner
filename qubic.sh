@@ -62,7 +62,7 @@ if [ "$cpu_true" = "y" ] ; then
   sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" cpu/appsettings.json
   sed -i "s/\"amountOfThreads\": 1/\"amountOfThreads\": $nbr_cpu/" cpu/appsettings.json
   sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.cpu\"/" cpu/appsettings.json
-  nbr_hugepages=$(( $nbr_cpu * 52 )) 
+  nbr_hugepages=$(( `grep -c ^processor /proc/cpuinfo`  *  168 )) 
   echo Nbr de hugepages avant 
   sysctl vm.nr_hugepages
   echo "Nbr de hugepages a mettre : $nbr_hugepages"
