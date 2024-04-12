@@ -19,13 +19,7 @@ rm -f qli-runner qli-runner.lock
 
 #Download Client
 echo "Download le client"
-#wget -q https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz -O qli-Client-1.8.8-Linux-x64.tar.gz
-#gzip -f -d qli-Client-1.8.8-Linux-x64.tar.gz
-#tar xf qli-Client-1.8.8-Linux-x64.tar qli-Client appsettings.json
-#wget -q https://dl.qubic.li/downloads/qli-Client-1.8.9-Linux-x64.tar.gz -O qli-Client-1.8.9-Linux-x64.tar.gz
-#gzip -f -d qli-Client-1.8.9-Linux-x64.tar.gz
-#tar xf qli-Client-1.8.9-Linux-x64.tar qli-Client appsettings.json
-#https://dl.qubic.li/downloads/qli-Client-1.8.10-Linux-x64.tar.gz
+#https://github.com/qubic-li/client?tab=readme-ov-file#pool-mining
 #wget -q https://dl.qubic.li/downloads/qli-Client-1.8.10-Linux-x64.tar.gz -O qli-Client-1.8.10-Linux-x64.tar.gz
 #gzip -f -d qli-Client-1.8.10-Linux-x64.tar.gz
 #tar xf qli-Client-1.8.10-Linux-x64.tar qli-Client appsettings.json
@@ -34,9 +28,8 @@ gzip -f -d qli-Client-1.9.0-Linux-x64.tar.gz
 tar xf qli-Client-1.9.0-Linux-x64.tar qli-Client appsettings.json
 
 #Ajout
-wget -q https://github.com/Qubic-Solutions/rqiner-builds/releases/download/v0.3.22/rqiner-x86-cuda -O /home/user/rqiner-x86-cuda
-chmod +x rqiner-x86-cuda
-
+#wget -q https://github.com/Qubic-Solutions/rqiner-builds/releases/download/v0.3.22/rqiner-x86-cuda -O /home/user/rqiner-x86-cuda
+#chmod +x rqiner-x86-cuda
 
 #fichier de config
 echo "Download fichier de config"
@@ -82,15 +75,15 @@ if [ "$cpu_true" = "y" ] ; then
 fi
 
 if [ "$gpu_true" = "y" ] ; then 
-  echo Creation répertoire gpu 
+  echo "Création répertoire gpu"
   sudo rm -rf /home/user/gpu
   mkdir -p /home/user/gpu
   cd /home/user 
-  #cp qli-Client appsettings.json gpu/
-  #echo "Ajout au fichier de config GPU"
-  #sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" gpu/appsettings.json
-  #sed -i "s/\"amountOfThreads\": 1/\"allowHwInfoCollect\": true/" gpu/appsettings.json
-  #sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.gpu\"/" gpu/appsettings.json
+  cp qli-Client appsettings.json gpu/
+  echo "Ajout au fichier de config GPU"
+  sed -i "s/\"accessToken\":.*/\"accessToken\": \"$token\",/" gpu/appsettings.json
+  sed -i "s/\"amountOfThreads\": 1/\"allowHwInfoCollect\": true/" gpu/appsettings.json
+  sed -i "s/\"alias\": \"qubic.li Client\"/\"alias\": \"$h.gpu\"/" gpu/appsettings.json
 
   echo "Mise en place du tuning"
   sudo nvtool --csv -d -n | awk -F';' '/3060/ {print "nvtool -i " $1 " --setcoreoffset 250 --setclocks 1500 --setmem 5001"}' | sh
@@ -103,11 +96,10 @@ if [ "$gpu_true" = "y" ] ; then
   sudo nvtool --csv -d -n | awk -F';' '/4080/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
   sudo nvtool --csv -d -n | awk -F';' '/4090/ {print "nvtool -i " $1 " --setcoreoffset 200 --setclocks 2900 --setmem 7000 --setmemoffset 2000"}' | sh
   
-  
-  #cd /home/user/gpu
   echo "Départ du miner GPU"
-  #/usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS qubic.gpu ./qli-Client
-  /usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS rqiner.gpu ./rqiner-x86-cuda -i $payout -l $h
+  cd /home/user/gpu
+  /usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS qubic.gpu ./qli-Client
+  #/usr/bin/screen -L -Logfile /run/user/1000/qubic.gpu.log -dmS rqiner.gpu ./rqiner-x86-cuda -i $payout -l $h
 
 fi
 
